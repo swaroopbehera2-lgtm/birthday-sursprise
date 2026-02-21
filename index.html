@@ -46,6 +46,12 @@ h1{
   color:#444;
 }
 
+.countdown{
+  font-weight:bold;
+  color:#6c5ce7;
+  margin-bottom:15px;
+}
+
 button{
   margin-top:20px;
   padding:12px 28px;
@@ -76,6 +82,7 @@ button:hover{
   position:absolute;
   width:6px;
   height:6px;
+  background:white;
   border-radius:50%;
   opacity:0.7;
   animation:float 8s linear infinite;
@@ -86,6 +93,7 @@ button:hover{
   50%{opacity:1;}
   100%{transform:translateY(-10vh); opacity:0;}
 }
+
 </style>
 </head>
 
@@ -97,6 +105,7 @@ button:hover{
 </audio>
 
 <div class="card" id="page1">
+  <div class="countdown" id="countdown"></div>
 
   <h1>✨ Happy 19th Birthday Simran ✨</h1>
   <div class="subtitle">To Someone Truly Amazing 🌸</div>
@@ -106,7 +115,7 @@ button:hover{
     a beautiful year ahead ✨<br><br>
     May this new chapter bring clarity,
     confidence, calm strength,
-    and moments that feel like quiet magic.
+    and moments that feel like magic.
   </div>
 
   <button onclick="startMagic()">Enter ✨</button>
@@ -126,7 +135,7 @@ button:hover{
     in your favor always ✨<br><br>
 
     Keep shining in your own
-    beautiful own way 💖
+    beautifully rare way 💖
   </div>
 </div>
 
@@ -142,13 +151,31 @@ function startMagic(){
   music.play();
 }
 
-/* Floating particles */
+/* Countdown to March 13, 2026 */
+let countDate = new Date("March 13, 2026 00:00:00").getTime();
+
+setInterval(function(){
+  let now = new Date().getTime();
+  let distance = countDate - now;
+
+  let days = Math.floor(distance/(1000*60*60*24));
+  let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  let seconds = Math.floor((distance%(1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  "⏳ Countdown to 19th Birthday<br>" +
+  days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+
+},1000);
+
+/* Floating particles generator */
 for(let i=0;i<40;i++){
   let p=document.createElement("div");
   p.className="particle";
   p.style.left=Math.random()*100+"vw";
   p.style.animationDuration=(5+Math.random()*5)+"s";
-  p.style.backgroundColor=`hsl(${Math.random()*360},70%,85%)`;
+  p.style.backgroundColor=`hsl(${Math.random()*360},70%,80%)`;
   document.body.appendChild(p);
 }
 
