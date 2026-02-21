@@ -46,12 +46,6 @@ h1{
   color:#444;
 }
 
-.countdown{
-  font-weight:bold;
-  color:#6c5ce7;
-  margin-bottom:15px;
-}
-
 button{
   margin-top:20px;
   padding:12px 28px;
@@ -82,7 +76,6 @@ button:hover{
   position:absolute;
   width:6px;
   height:6px;
-  background:white;
   border-radius:50%;
   opacity:0.7;
   animation:float 8s linear infinite;
@@ -93,20 +86,16 @@ button:hover{
   50%{opacity:1;}
   100%{transform:translateY(-10vh); opacity:0;}
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 Background Music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a6d3e9a4f.mp3?filename=soft-piano-ambient-110624.mp3" type="audio/mp3">
 </audio>
 
 <div class="card" id="page1">
-  <div class="countdown" id="countdown"></div>
-
   <h1>✨ Happy 19th Birthday Simran ✨</h1>
   <div class="subtitle">To Someone Truly Amazing 🌸</div>
 
@@ -115,7 +104,7 @@ button:hover{
     a beautiful year ahead ✨<br><br>
     May this new chapter bring clarity,
     confidence, calm strength,
-    and moments that feel like magic.
+    and moments that feel like quiet magic.
   </div>
 
   <button onclick="startMagic()">Enter ✨</button>
@@ -134,14 +123,12 @@ button:hover{
     And may life move gently
     in your favor always ✨<br><br>
 
-    Keep shining in your own
-    beautifully rare way 💖
+    Keep shining in your own beautiful way 💖
   </div>
 </div>
 
 <script>
 
-/* Start Experience */
 function startMagic(){
   document.getElementById("page1").classList.add("hidden");
   document.getElementById("page2").classList.remove("hidden");
@@ -151,31 +138,13 @@ function startMagic(){
   music.play();
 }
 
-/* Countdown to March 13, 2026 */
-let countDate = new Date("March 13, 2026 00:00:00").getTime();
-
-setInterval(function(){
-  let now = new Date().getTime();
-  let distance = countDate - now;
-
-  let days = Math.floor(distance/(1000*60*60*24));
-  let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-  let seconds = Math.floor((distance%(1000*60))/1000);
-
-  document.getElementById("countdown").innerHTML =
-  "⏳ Countdown to 19th Birthday<br>" +
-  days+"d "+hours+"h "+minutes+"m "+seconds+"s";
-
-},1000);
-
-/* Floating particles generator */
+/* Floating particles */
 for(let i=0;i<40;i++){
   let p=document.createElement("div");
   p.className="particle";
   p.style.left=Math.random()*100+"vw";
   p.style.animationDuration=(5+Math.random()*5)+"s";
-  p.style.backgroundColor=`hsl(${Math.random()*360},70%,80%)`;
+  p.style.backgroundColor=`hsl(${Math.random()*360},70%,85%)`;
   document.body.appendChild(p);
 }
 
