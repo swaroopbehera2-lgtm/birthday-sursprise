@@ -1,93 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Happy Birthday 🎉</title>
+<title>Happy Birthday ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
   margin:0;
   padding:0;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
-  font-family: Arial, sans-serif;
+  text-align:center;
   overflow:hidden;
 }
 
 .card {
-  background:white;
+  background: rgba(255,255,255,0.92);
   padding:40px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  animation: pop 1s ease;
+  border-radius:25px;
+  width:90%;
+  max-width:400px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  animation: fadeIn 1.5s ease;
 }
 
 h1 {
-  color:#ff4081;
-  font-size:40px;
+  color:#e84393;
+  font-size:30px;
+  margin-bottom:10px;
 }
 
-p {
-  font-size:20px;
+.subtitle {
+  font-style:italic;
+  color:#555;
+  margin-bottom:25px;
+}
+
+.message {
+  font-size:17px;
   color:#444;
+  line-height:1.7;
 }
 
 button {
-  margin-top:20px;
-  padding:10px 20px;
+  margin-top:25px;
+  padding:12px 25px;
   border:none;
-  background:#ff4081;
+  border-radius:25px;
+  background: linear-gradient(45deg,#ff758c,#ff7eb3);
   color:white;
-  border-radius:10px;
-  font-size:18px;
+  font-size:16px;
   cursor:pointer;
+  transition:0.3s;
 }
 
-@keyframes pop {
-  0% {transform:scale(0);}
-  100% {transform:scale(1);}
+button:hover {
+  transform:scale(1.05);
 }
 
-.confetti {
-  position:absolute;
-  width:10px;
-  height:10px;
-  background:red;
-  animation: fall 5s linear infinite;
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
-@keyframes fall {
-  0% {top:-10px;}
-  100% {top:100vh;}
+.hidden {
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>🎂 Happy Birthday Simran! 🎉</h1>
-  <p>May your day be filled with happiness,<br>
-  laughter and lots of love ❤️</p>
-  <button onclick="showWish()">Click for Surprise 🎁</button>
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a6d3e9a4f.mp3?filename=soft-piano-ambient-110624.mp3" type="audio/mp3">
+</audio>
+
+<div class="card" id="page1">
+  <h1>✨ Happy Birthday Simran ✨</h1>
+  <div class="subtitle">To My Truly Amazing Friend 🌷</div>
+
+  <div class="message">
+    Wishing you a year filled with
+    beautiful beginnings, gentle surprises,
+    and moments that feel like quiet magic.<br><br>
+    May your days glow softly with happiness,
+    and may life guide you toward
+    light, warmth, and endless possibility ✨
+  </div>
+
+  <button onclick="nextPage()">Next ➜</button>
+</div>
+
+<div class="card hidden" id="page2">
+  <h1>🌸 Best Wishes 🌸</h1>
+
+  <div class="message">
+    On this new chapter of your journey,<br>
+    may life unfold in the most graceful ways.<br><br>
+
+    🌟 Clarity bright as morning sunshine,<br>
+    🌙 Peace gentle as drifting moonlight,<br>
+    🌈 Opportunities that lift you higher,<br><br>
+
+    And may a little magic follow
+    wherever your heart chooses to go ✨<br><br>
+
+    Keep shining in your own beautiful way 💖
+  </div>
+
+  <button onclick="location.reload()">Again ✨</button>
 </div>
 
 <script>
-function showWish() {
-  alert("Wishing you success, joy and all your dreams come true! 🎉💖");
-}
+function nextPage(){
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
 
-for(let i=0;i<50;i++){
-  let conf=document.createElement("div");
-  conf.className="confetti";
-  conf.style.left=Math.random()*100+"vw";
-  conf.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
-  conf.style.animationDuration=(Math.random()*3+2)+"s";
-  document.body.appendChild(conf);
+  // Play music when user clicks
+  document.getElementById("bgMusic").play();
 }
 </script>
 
 </body>
 </html>
+
+
