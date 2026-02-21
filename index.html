@@ -7,8 +7,7 @@
 <style>
 body {
   margin:0;
-  padding:0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family:'Segoe UI', sans-serif;
   background: linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
@@ -19,35 +18,39 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.92);
-  padding:40px;
+  background: rgba(255,255,255,0.95);
+  padding:30px;
   border-radius:25px;
   width:90%;
-  max-width:400px;
+  max-width:420px;
   box-shadow:0 15px 40px rgba(0,0,0,0.2);
-  animation: fadeIn 1.5s ease;
 }
 
 h1 {
   color:#e84393;
-  font-size:30px;
   margin-bottom:10px;
 }
 
 .subtitle {
   font-style:italic;
+  margin-bottom:20px;
   color:#555;
-  margin-bottom:25px;
 }
 
 .message {
-  font-size:17px;
+  font-size:16px;
+  line-height:1.6;
   color:#444;
-  line-height:1.7;
+}
+
+.countdown {
+  margin-bottom:20px;
+  font-weight:bold;
+  color:#6c5ce7;
 }
 
 button {
-  margin-top:25px;
+  margin-top:20px;
   padding:12px 25px;
   border:none;
   border-radius:25px;
@@ -55,16 +58,6 @@ button {
   color:white;
   font-size:16px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover {
-  transform:scale(1.05);
-}
-
-@keyframes fadeIn {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
 }
 
 .hidden {
@@ -75,58 +68,80 @@ button:hover {
 
 <body>
 
-<!-- 🎵 Background Music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a6d3e9a4f.mp3?filename=soft-piano-ambient-110624.mp3" type="audio/mp3">
 </audio>
 
 <div class="card" id="page1">
+  <div class="countdown" id="countdown"></div>
+
   <h1>✨ Happy Birthday Simran ✨</h1>
   <div class="subtitle">To My Truly Amazing Friend 🌷</div>
 
   <div class="message">
-    Wishing you a year filled with
-    beautiful beginnings, gentle surprises,
-    and moments that feel like quiet magic.<br><br>
-    May your days glow softly with happiness,
-    and may life guide you toward
-    light, warmth, and endless possibility ✨
+    Another beautiful year is about to begin.<br>
+    A year filled with growth, grace, and magic ✨<br><br>
+    I hope 19 brings you clarity,
+    peace in your heart,
+    and dreams that unfold gently and beautifully.
   </div>
 
-  <button onclick="nextPage()">Next ➜</button>
+  <button onclick="startExperience()">Enter ✨</button>
 </div>
 
 <div class="card hidden" id="page2">
   <h1>🌸 Best Wishes 🌸</h1>
-
   <div class="message">
-    On this new chapter of your journey,<br>
-    may life unfold in the most graceful ways.<br><br>
+    On your 19th journey around the sun,<br><br>
 
-    🌟 Clarity bright as morning sunshine,<br>
-    🌙 Peace gentle as drifting moonlight,<br>
-    🌈 Opportunities that lift you higher,<br><br>
+    🌟 May your light shine brighter than ever,<br>
+    🌙 May your heart stay soft and strong,<br>
+    🌈 May every opportunity find its way to you,<br><br>
 
-    And may a little magic follow
-    wherever your heart chooses to go ✨<br><br>
+    And may life always move in your favor ✨<br><br>
 
-    Keep shining in your own beautiful way 💖
+    Keep being the beautiful soul you are 💖
   </div>
-
-  <button onclick="location.reload()">Again ✨</button>
 </div>
 
 <script>
-function nextPage(){
+
+// 🎵 Start Music + Go Next
+function startExperience(){
   document.getElementById("page1").classList.add("hidden");
   document.getElementById("page2").classList.remove("hidden");
 
-  // Play music when user clicks
-  document.getElementById("bgMusic").play();
+  let music = document.getElementById("bgMusic");
+  music.volume = 0.4;
+  music.play();
 }
+
+// ⏳ Countdown to March 13, 2026
+let countDate = new Date("March 13, 2026 00:00:00").getTime();
+
+let x = setInterval(function() {
+
+  let now = new Date().getTime();
+  let distance = countDate - now;
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+  "⏳ Countdown to 19th Birthday: <br>" +
+  days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "🎉 It's Her 19th Birthday! 🎉";
+  }
+
+}, 1000);
+
 </script>
 
 </body>
 </html>
-
-
