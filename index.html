@@ -2,10 +2,9 @@
 <html>
 <head>
 <title>Happy Birthday ✨</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -13,8 +12,13 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
+html,body{
+width:100%;
+overflow-x:hidden;
+}
+
 body{
-min-height:100vh;
+min-height:100svh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -33,18 +37,16 @@ padding:20px;
 .card{
 width:100%;
 max-width:380px;
-background:rgba(255,255,255,0.9);
+background:white;
 padding:30px;
 border-radius:25px;
 text-align:center;
 box-shadow:0 15px 40px rgba(0,0,0,0.15);
-transition:0.6s ease;
+transition:0.5s ease;
 }
 
 .hidden{
-opacity:0;
-transform:translateY(20px);
-pointer-events:none;
+display:none;
 }
 
 h1{
@@ -74,20 +76,6 @@ background:linear-gradient(45deg,#ff758c,#ff7eb3);
 color:white;
 font-size:14px;
 cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-.fade-in{
-animation:fadeIn 1.2s ease forwards;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -96,10 +84,10 @@ to{opacity:1; transform:translateY(0);}
 <body>
 
 <audio id="bgMusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a6d3e9a4f.mp3?filename=soft-piano-ambient-110624.mp3" type="audio/mp3">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5a6d3e9a4f.mp3?filename=soft-piano-ambient-110624.mp3">
 </audio>
 
-<div class="card fade-in" id="page1">
+<div class="card" id="page1">
 <h1>✨ Happy 19th Birthday Simran ✨</h1>
 <div class="subtitle">To My Truly Amazing Friend 🌸</div>
 
@@ -118,13 +106,10 @@ and magic to your journey ✨
 
 <div class="message">
 On your 19th journey around the sun,<br><br>
-
 🌟 May confidence bloom within you,<br>
 🌙 May your heart stay soft yet fearless,<br>
 🌈 May opportunities find you effortlessly,<br><br>
-
 And may life move beautifully in your favor always ✨<br><br>
-
 Keep shining in your own beautiful way 💖
 </div>
 
@@ -132,11 +117,9 @@ Keep shining in your own beautiful way 💖
 </div>
 
 <script>
-
 function nextPage(){
 document.getElementById("page1").classList.add("hidden");
 document.getElementById("page2").classList.remove("hidden");
-document.getElementById("page2").classList.add("fade-in");
 
 let music=document.getElementById("bgMusic");
 music.volume=0;
@@ -147,7 +130,6 @@ if(music.volume<0.4){music.volume+=0.02;}
 else{clearInterval(fade);}
 },200);
 }
-
 </script>
 
 </body>
