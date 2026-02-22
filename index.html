@@ -117,19 +117,72 @@ Keep shining in your own beautiful way 💖
 </div>
 
 <script>
+
 function nextPage(){
-document.getElementById("page1").classList.add("hidden");
-document.getElementById("page2").classList.remove("hidden");
 
-let music=document.getElementById("bgMusic");
-music.volume=0;
+let page1 = document.getElementById("page1");
+let page2 = document.getElementById("page2");
+let music = document.getElementById("bgMusic");
+
+/* Smooth shrink + fade */
+page1.style.transition = "all 0.6s ease";
+page1.style.transform = "scale(0.9)";
+page1.style.opacity = "0";
+
+setTimeout(() => {
+page1.classList.add("hidden");
+page2.classList.remove("hidden");
+
+/* Slide up animation */
+page2.style.opacity = "0";
+page2.style.transform = "translateY(40px)";
+page2.style.transition = "all 0.8s ease";
+
+setTimeout(()=>{
+page2.style.opacity = "1";
+page2.style.transform = "translateY(0)";
+animateText();
+},100);
+
+},600);
+
+/* Music fade */
+music.volume = 0;
 music.play();
-
-let fade=setInterval(()=>{
-if(music.volume<0.4){music.volume+=0.02;}
-else{clearInterval(fade);}
-},200);
+let fade = setInterval(()=>{
+if(music.volume < 0.4){
+music.volume += 0.02;
+}else{
+clearInterval(fade);
 }
+},200);
+
+}
+
+/* Text stagger animation */
+function animateText(){
+let lines = document.querySelectorAll("#page2 .message br, #page2 .message");
+
+let message = document.querySelector("#page2 .message");
+let text = message.innerHTML;
+message.innerHTML = "";
+
+let parts = text.split("<br>");
+parts.forEach((line,index)=>{
+let div = document.createElement("div");
+div.innerHTML = line;
+div.style.opacity = "0";
+div.style.transform = "translateY(15px)";
+div.style.transition = "all 0.6s ease";
+message.appendChild(div);
+
+setTimeout(()=>{
+div.style.opacity = "1";
+div.style.transform = "translateY(0)";
+}, index * 300);
+});
+}
+
 </script>
 
 </body>
