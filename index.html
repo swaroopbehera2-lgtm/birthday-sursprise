@@ -78,7 +78,77 @@ font-size:14px;
 cursor:pointer;
 }
 
-</style>
+/* ===== DOMAIN EXPANSION EFFECTS ===== */
+
+/* Ambient Glow */
+body::before{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:radial-gradient(circle,#ff7eb3 0%, transparent 70%);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+filter:blur(80px);
+opacity:0.4;
+z-index:-1;
+animation:pulseGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow{
+from{transform:translate(-50%,-50%) scale(1);}
+to{transform:translate(-50%,-50%) scale(1.2);}
+}
+
+/* Card floating */
+.card{
+animation:cardBreath 5s ease-in-out infinite alternate;
+}
+
+@keyframes cardBreath{
+from{transform:translateY(0);}
+to{transform:translateY(-6px);}
+}
+
+/* Button ripple */
+button{
+position:relative;
+overflow:hidden;
+}
+
+button::after{
+content:"";
+position:absolute;
+width:10px;
+height:10px;
+background:rgba(255,255,255,0.6);
+border-radius:50%;
+transform:scale(0);
+opacity:0;
+pointer-events:none;
+}
+
+button:active::after{
+left:50%;
+top:50%;
+transform:translate(-50%,-50%) scale(12);
+opacity:0;
+transition:0.6s ease;
+}
+
+/* Floating petals */
+.petal{
+position:fixed;
+top:-20px;
+font-size:18px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}</style>
 </head>
 
 <body>
@@ -183,7 +253,39 @@ div.style.transform = "translateY(0)";
 });
 }
 
-</script>
+/* Floating Petals */
+for(let i=0;i<12;i++){
+let petal=document.createElement("div");
+petal.className="petal";
+petal.innerHTML="🌸";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(8+Math.random()*6)+"s";
+petal.style.opacity=Math.random();
+document.body.appendChild(petal);
+}
+
+/* Cursor Sparkle Trail */
+document.addEventListener("mousemove",function(e){
+let sparkle=document.createElement("div");
+sparkle.innerHTML="✨";
+sparkle.style.position="fixed";
+sparkle.style.left=e.clientX+"px";
+sparkle.style.top=e.clientY+"px";
+sparkle.style.pointerEvents="none";
+sparkle.style.fontSize="14px";
+sparkle.style.opacity="1";
+sparkle.style.transition="all 0.6s ease";
+document.body.appendChild(sparkle);
+
+setTimeout(()=>{
+sparkle.style.opacity="0";
+sparkle.style.transform="translateY(-20px)";
+},10);
+
+setTimeout(()=>{
+sparkle.remove();
+},600);
+});</script>
 
 </body>
 </html>
