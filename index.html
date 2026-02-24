@@ -148,6 +148,52 @@ animation:fall linear infinite;
 @keyframes fall{
 0%{transform:translateY(-10vh) rotate(0deg);}
 100%{transform:translateY(110vh) rotate(360deg);}
+}/* ===== Romantic Shimmer Title ===== */
+
+h1{
+position:relative;
+overflow:hidden;
+}
+
+h1::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent 0%,
+rgba(255,255,255,0.8) 50%,
+transparent 100%
+);
+animation:shimmer 4s infinite;
+}
+
+@keyframes shimmer{
+0%{left:-100%;}
+100%{left:100%;}
+}
+
+/* ===== Romantic Heart Burst ===== */
+
+.heart{
+position:fixed;
+font-size:18px;
+animation:heartFly 1s ease-out forwards;
+pointer-events:none;
+}
+
+@keyframes heartFly{
+0%{
+opacity:1;
+transform:scale(1) translate(0,0);
+}
+100%{
+opacity:0;
+transform:scale(1.5) translate(var(--x), var(--y));
+}
 }</style>
 </head>
 
@@ -202,7 +248,7 @@ page1.style.opacity = "0";
 setTimeout(() => {
 page1.classList.add("hidden");
 page2.classList.remove("hidden");
-
+heartBurst();
 /* Slide up animation */
 page2.style.opacity = "0";
 page2.style.transform = "translateY(40px)";
@@ -285,7 +331,31 @@ sparkle.style.transform="translateY(-20px)";
 setTimeout(()=>{
 sparkle.remove();
 },600);
-});</script>
+});/* Romantic Heart Burst */
+function heartBurst(){
+
+let centerX = window.innerWidth/2;
+let centerY = window.innerHeight/2;
+
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+
+heart.style.left=centerX+"px";
+heart.style.top=centerY+"px";
+
+heart.style.setProperty('--x',(Math.random()*300-150)+"px");
+heart.style.setProperty('--y',(Math.random()*300-150)+"px");
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},1000);
+}
+
+}</script>
 
 </body>
 </html>
